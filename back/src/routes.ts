@@ -6,7 +6,7 @@ const router = Router();
 
 
 router.get('/teste', ( req: Request, res: Response )=>{
-     throw new Error("erro ao fazer a requisição")
+    return res.json({ ok: true });
 })
 
 
