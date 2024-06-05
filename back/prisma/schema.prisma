@@ -13,11 +13,117 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// criar uma migration: npx prisma migrate dev
+model User {
+  id         String    @id @default(uuid())
+  nome       String
+  password   String
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
 
-model User{
-  id String @id @default(uuid())
+  grupo_id String
+  grupos   Grupo  @relation(fields: [grupo_id], references: [id])
+
+  @@map("users")
+}
+
+model Grupo {
+  id         String    @id @default(uuid())
+  nome_grupo String
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+  users   User[]
+  visitas Visita[]
+  pessoas_alcancadas  PessoasAlcan[]
+  novos_integrantes  NovosInte[]
+  aconselhamentos Aconselhamento[]
+  reunioes Reuniao[]
+
+
+
+  @@map("grupos")
+}
+
+model Visita {
+  id         String    @id @default(uuid())
+  nome_visitante  String
+  data_visita String
+  descricao  String?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+ 
+  grupo_id String
+  grupos   Grupo  @relation(fields: [grupo_id], references: [id])
+
+  @@map("visitas")
+}
+
+model PessoasAlcan {
+  id         String    @id @default(uuid())
+  nome  String
+  descricao  String?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+ 
+  grupo_id String
+  grupos   Grupo  @relation(fields: [grupo_id], references: [id])
+
+  @@map("pessoas_alcancadas")
+}
+
+model NovosInte{
+  id         String    @id @default(uuid())
   nome String
-  password String
-  grupo Int
+  data String
+  descricao  String?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+ 
+  grupo_id String
+  grupos   Grupo  @relation(fields: [grupo_id], references: [id])
 
+  @@map("novos_integrantes")
+}
+
+
+
+model Aconselhamento{
+  id         String    @id @default(uuid())
+  nome String
+  data_visita String
+  descricao  String?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+ 
+  grupo_id String
+  grupos   Grupo  @relation(fields: [grupo_id], references: [id])
+
+  @@map("aconselhamentos")
+}
+model Reuniao{
+  id         String    @id @default(uuid())
+  nome String
+  data_visita String
+  descricao  String?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+ 
+  grupo_id String
+  grupos   Grupo  @relation(fields: [grupo_id], references: [id])
+
+  @@map("reunioes")
+}
+model Ligacao{
+  id         String    @id @default(uuid())
+  nome String
+  data_visita String
+  descricao  String?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+ 
+  grupo_id String
+  grupos   Grupo  @relation(fields: [grupo_id], references: [id])
+
+  @@map("reunioes")
 }
