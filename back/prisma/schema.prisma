@@ -22,6 +22,7 @@ model User {
   updated_at DateTime? @default(now())
 
   grupo_id String
+  
   grupos   Grupo  @relation(fields: [grupo_id], references: [id])
 
   @@map("users")
@@ -33,17 +34,26 @@ model Grupo {
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
 
-  users   User[]
-  visitas Visita[]
+  users               User[]
+  visitas             Visita[]
   pessoas_alcancadas  PessoasAlcan[]
-  novos_integrantes  NovosInte[]
-  aconselhamentos Aconselhamento[]
-  reunioes Reuniao[]
+  novos_integrantes   NovosInte[]
+  aconselhamentos     Aconselhamento[]
+  reunioes            Reuniao[]
+  ligacoes            Ligacao[]
+  batismos            Batismo[]
+  saidas_grupos       SaidaGrupo[]
+  financeiros         Financeiro[]
+  ceias_entregadas    CeiaEntre[]
+  cartas_mudancas     CartaMudanca[] 
+  discipulados        Discipulado[] 
+  Reconciliacoes      Reconciliacao[]
 
 
 
   @@map("grupos")
 }
+
 
 model Visita {
   id         String    @id @default(uuid())
@@ -125,5 +135,98 @@ model Ligacao{
   grupo_id String
   grupos   Grupo  @relation(fields: [grupo_id], references: [id])
 
-  @@map("reunioes")
+  @@map("ligacoes")
+}
+model Batismo{
+  id         String    @id @default(uuid())
+  nome String
+  data_batismo String
+  descricao  String?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+ 
+  grupo_id String
+  grupos   Grupo  @relation(fields: [grupo_id], references: [id])
+
+  @@map("batismos")
+}
+model SaidaGrupo{
+  id         String    @id @default(uuid())
+  nome String
+  data_saida String
+  descricao  String?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+ 
+  grupo_id String
+  grupos   Grupo  @relation(fields: [grupo_id], references: [id])
+
+  @@map("saidas_grupos")
+}
+model Financeiro{
+  id         String    @id @default(uuid())
+  nome_evento String
+  data_evento String
+  valor_arrecadado Decimal @db.Decimal(9,2)
+  valor_gasto Decimal @db.Decimal(9,2)
+  descricao  String?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+ 
+  grupo_id String
+  grupos   Grupo  @relation(fields: [grupo_id], references: [id])
+
+  @@map("financeiros")
+}
+model CeiaEntre{
+  id         String    @id @default(uuid())
+  nome String
+  data_entrega String
+  descricao  String?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+ 
+  grupo_id String
+  grupos   Grupo  @relation(fields: [grupo_id], references: [id])
+
+  @@map("ceias_entregadas")
+}
+model CartaMudanca{
+  id         String    @id @default(uuid())
+  nome String
+  data_entrada String
+  descricao  String?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+ 
+  grupo_id String
+  grupos   Grupo  @relation(fields: [grupo_id], references: [id])
+
+  @@map("cartas_mudancas")
+}
+model Discipulado{
+  id         String    @id @default(uuid())
+  nome String
+  data_discipulado String
+  descricao  String?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+ 
+  grupo_id String
+  grupos   Grupo  @relation(fields: [grupo_id], references: [id])
+
+  @@map("discipulados")
+}
+model Reconciliacao{
+  id         String    @id @default(uuid())
+  nome String
+  data_reconciliacao String
+  descricao  String?
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+ 
+  grupo_id String
+  grupos   Grupo  @relation(fields: [grupo_id], references: [id])
+
+  @@map("reconciliacoes")
 }
