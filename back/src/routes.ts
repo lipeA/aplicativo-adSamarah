@@ -1,6 +1,10 @@
 import { Router, Request, Response } from 'express' ;
+// middleware
+import AutentificaUserLogin from './middlewares/AutentificaUserLogin';
 //user
 import { CreateUserController } from './controllers/users/CreateUserController';
+import { LoginUserController } from './controllers/login/LoginUserController';
+
 //grupo
 import { CreateGruposController } from './controllers/grupos/CreateGruposController';
 import { GetGruposController, GetTodosGruposController } from './controllers/grupos/GetGruposController';
@@ -16,8 +20,8 @@ router.get('/teste', ( req: Request, res: Response )=>{
 
 
 // Users
-router.post('/criar-users', new CreateUserController().handle)
-
+router.post('/criar-users', AutentificaUserLogin, new CreateUserController().handle)
+router.post('/login-user', new LoginUserController().handle )
 
 // grupo
 router.post('/criar-grupos', new CreateGruposController().handle)

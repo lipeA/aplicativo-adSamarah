@@ -1,8 +1,8 @@
 
 import prismaClient from "../../prisma";
-import { compare } from 'bcryptjs'
-import { sign } from 'jsonwebtoken'
-
+import { compare } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
+import {config} from 'dotenv'
 
 interface Props {
     nome: string;
@@ -44,14 +44,25 @@ class LoginUserService {
         // gerar o tokken
 
         const tokken = sign(
-            {nome: usuarioExistente.nome},
-             process.env.JWT_secret
+        
+            {
+                nome:usuarioExistente.nome
+            },
+             process.env.JWT_SECRET,
+            {
+                subject: usuarioExistente.id,
+                expiresIn: '1d'
             
-            )
+            }
+        )
 
 
 
-
+            return{
+                id: usuarioExistente.id,
+                nome: usuarioExistente.nome,
+                tokken: tokken
+            }
 
 
 
