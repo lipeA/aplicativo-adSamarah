@@ -4,6 +4,7 @@ import AutentificaUserLogin from './middlewares/AutentificaUserLogin';
 //user
 import { CreateUserController } from './controllers/users/CreateUserController';
 import { LoginUserController } from './controllers/login/LoginUserController';
+import { UpdateUserController } from './controllers/users/UpdateUserController';
 
 //grupo
 import { CreateGruposController } from './controllers/grupos/CreateGruposController';
@@ -20,8 +21,9 @@ router.get('/teste', ( req: Request, res: Response )=>{
 
 
 // Users
-router.post('/criar-users', AutentificaUserLogin, new CreateUserController().handle)
+router.post('/criar-users', new CreateUserController().handle)
 router.post('/login-user', new LoginUserController().handle )
+router.put('/update-user/:id', new UpdateUserController().handle)
 
 // grupo
 router.post('/criar-grupos', new CreateGruposController().handle)
