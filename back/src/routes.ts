@@ -12,6 +12,14 @@ import { GetGruposController, GetTodosGruposController } from './controllers/gru
 import { UpdateGruposController } from './controllers/grupos/UpdateGruposController';
 import { DeleteGruposController } from './controllers/grupos/deleteGruposController';
 
+//visita
+import { getVisitasController, getTodasVisitasController } from './controllers/visitas/getVisitasController';
+import { CreateVisitaController } from './controllers/visitas/CreateVisitaController';
+
+
+
+
+
 const router = Router();
 //teste
 router.get('/teste', ( req: Request, res: Response )=>{
@@ -23,14 +31,20 @@ router.get('/teste', ( req: Request, res: Response )=>{
 // Users
 router.post('/criar-users', new CreateUserController().handle)
 router.post('/login-user', new LoginUserController().handle )
-router.put('/update-user/:id', new UpdateUserController().handle)
+router.put('/atualizar-user/:id', new UpdateUserController().handle)
 
 // grupo
-router.post('/criar-grupos', new CreateGruposController().handle)
-router.get('/busca-grupos/:id', new GetGruposController().handle)
+router.post('/criar-grupo', new CreateGruposController().handle)
 router.get('/todos-grupos', new  GetTodosGruposController().handle)
-router.put('/atualizar-grupos/:id', new UpdateGruposController().handle)
-router.delete('/delete-grupos/:id', new DeleteGruposController().handle)
+router.get('/busca-grupo/:id', new GetGruposController().handle)
+router.put('/atualizar-grupo/:id', new UpdateGruposController().handle)
+router.delete('/delete-grupo/:id', new DeleteGruposController().handle)
+
+//visita
+router.post('/criar-visita', new CreateVisitaController().handle)
+router.get('/buscar-visitas', new getTodasVisitasController().handle)
+router.get('/buscar-visitas/:id', new getVisitasController().handle)
+router.put('/atualizar-visita/:id')
 
 
 
