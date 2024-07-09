@@ -9,7 +9,7 @@ class getTodasVisitasController{
 
         const gettodasVisitasService = new getTodasVisitasService();
 
-        const todasVisitas = gettodasVisitasService.execute();
+        const todasVisitas = await gettodasVisitasService.execute();
 
         return res.json(todasVisitas)
 
@@ -27,7 +27,7 @@ class getVisitasController{
 
         const getvisitasService = new getVisitasService();
 
-        const visita = getvisitasService.execute({id})
+        const visita = await getvisitasService.execute({id})
 
 
         return res.json(visita)

@@ -9,7 +9,6 @@ interface Props{
 
 class getVisitasService{
     async execute( {id}:Props ){
-        
         if (!id) {
             throw new Error("Informe o id da visita!");
             
